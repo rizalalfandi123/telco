@@ -1,8 +1,12 @@
+import { Box, CircularProgress } from "@mui/material";
 import axios from "axios";
-import { useState } from "react";
-import Map from "react-map-gl";
+import { useEffect, useState } from "react";
+import Map, { Layer, Source } from "react-map-gl";
 import { useQuery } from "react-query";
 import { endpoints } from "../../utils/endpoints";
+import { parseExistFilter } from "../../utils/parse-exist-filter";
+import qs from "query-string";
+import bbox from "@turf/bbox";
 
 const MAPBOX_TOKEN =
   "pk.eyJ1Ijoicml6YWxhbGZhbmRpIiwiYSI6ImNsZHoxMjEwMzB3engzb3BobzRkMDFpNDAifQ.cHzLqL-jp4bxjHf7UB9cCQ";
@@ -17,18 +21,60 @@ export const dataLayer = {
   },
 };
 
+const generateEndpointGeoJson = () => {
+  const existFilter = parseExistFilter();
+
+  if (existFilter["kecamatan"]) {
+    return endpoints.polygon_kec(existFilter.kecamatan.id);
+  }
+
+  if (existFilter["kabupaten"]) {
+    return endpoints.polygon_kab(existFilter.kabupaten.id);
+  }
+
+  if (existFilter["provinsi"]) {
+    return endpoints.polygon_prov(existFilter.provinsi.id);
+  }
+
+  return endpoints.indo;
+};
+
 export const Maps = () => {
   const [map, setMap] = useState(null);
 
+  const geoJsonEndpoint = generateEndpointGeoJson();
+
   const { data: geoJson, isLoading } = useQuery({
     queryFn: async () => {
-      const res = await axios.get(endpoints.indo);
+      const res = await axios.get(geoJsonEndpoint);
 
       return res.data.data;
     },
 
-    queryKey: ["MAPS"],
+    queryKey: ["MAPS", geoJsonEndpoint],
+
+    cacheTime: Infinity,
+
+    staleTime: Infinity,
   });
+
+  useEffect(() => {
+    if (geoJson && map) {
+      const box = bbox(geoJson);
+      if (box && box.length > 3) {
+        const [minLng, minLat, maxLng, maxLat] = box;
+        console.log({ box });
+
+        map.fitBounds(
+          [
+            [minLng, minLat],
+            [maxLng, maxLat],
+          ],
+          { padding: 28, duration: 1000 }
+        );
+      }
+    }
+  }, [geoJson, map]);
 
   return (
     <>
@@ -47,7 +93,7 @@ export const Maps = () => {
         interactive
         interactiveLayerIds={["data"]}
       >
-        {/* <Source type="geojson" data={geoJson} id="data">
+        <Source type="geojson" data={geoJson} id="data">
           <Layer {...dataLayer} interactive />
         </Source>
         {isLoading && (
@@ -66,7 +112,7 @@ export const Maps = () => {
           >
             <CircularProgress size="2.8rem" />
           </Box>
-        )} */}
+        )}
       </Map>
     </>
   );

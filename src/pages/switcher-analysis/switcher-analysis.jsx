@@ -16,7 +16,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import qs from "query-string";
 import { parseExistFilter } from "../../utils/parse-exist-filter";
 
-export const DemandAnalysisPage = () => {
+export const SwitcherAnalysisPage = () => {
   let location = useLocation();
 
   const navigate = useNavigate();
@@ -83,16 +83,8 @@ export const DemandAnalysisPage = () => {
           <Card>
             <CardHeader title="Sankey" />
             <Divider />
-            <CardContent
-              sx={({ breakpoints }) => ({
-                height: "60vh",
-                [breakpoints.down("md")]: {
-                  height: "80vh",
-                },
-              })}
-            >
-              <Sankey />
-            </CardContent>
+
+            <Sankey />
           </Card>
         </Grid>
       </Grid>
