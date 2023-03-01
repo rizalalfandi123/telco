@@ -113,20 +113,28 @@ export const Navbar = ({ children }) => {
           backgroundColor: palette.background.default,
         })}
       >
-        <Toolbar sx={{ minHeight: "64px !important"}}>
-          <IconButton
-            edge="start"
-            onClick={handleButtonMenu}
-            sx={{ marginRight: 1 }}
-          >
-            <Menu />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            LOGO DISINI
-          </Typography>
-          <div>
+        <Toolbar
+          sx={{
+            display: "flex",
+            minHeight: "64px !important",
+            justifyContent: "space-between",
+          }}
+        >
+          <Box sx={{ display:"flex" }}>
+            <IconButton
+              edge="start"
+              onClick={handleButtonMenu}
+              sx={{ marginRight: 1 }}
+            >
+              <Menu />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div" sx={{ marginTop:"5px" }}>
+              LOGO DISINI
+            </Typography>
+          </Box>
+          <Box>
             <UserMenu />
-          </div>
+          </Box>
         </Toolbar>
       </AppBar>
       <Box
