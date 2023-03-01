@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, CircularProgress,  Paper, } from "@mui/material";
+import { Card,  Paper, CardContent, Typography, Box } from "@mui/material";
 
 const Audiences = () => {
   return (
@@ -16,7 +16,17 @@ const Audiences = () => {
           },
         })}
       >
-        OKE
+        <Card>
+            <CardContent>
+                <Typography variant="h6">
+                    Audiences
+                </Typography>
+                <hr/>
+                <Box>
+
+                </Box>
+            </CardContent>
+        </Card>
       </Paper>
     </>
   )
