@@ -14,6 +14,7 @@ import { useCallback, useMemo, useState } from "react";
 
 import {
   AssessmentOutlined,
+  EqualizerOutlined,
   LayersOutlined,
   MapOutlined,
   Menu,
@@ -34,7 +35,7 @@ const navigationBar = [
   {
     title: "Demand Analysis",
     pathname: "/demand-analysis",
-    icon: <TrendingUpOutlined />,
+    icon: <EqualizerOutlined />,
   },
   {
     title: "Competitive Mapping",
@@ -56,7 +57,7 @@ const navigationBar = [
   {
     title: "Decision Support System",
     pathname: "/decision-support-system",
-    icon: <SupportAgentOutlined />,
+    icon: <TrendingUpOutlined />,
   },
 ];
 
