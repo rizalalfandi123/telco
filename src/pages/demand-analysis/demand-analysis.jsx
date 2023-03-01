@@ -1,13 +1,9 @@
 import { Maps } from "../../components/maps/maps";
 import {
-  Box,
   Button,
   Card,
   CardContent,
-  CardHeader,
-  Divider,
   Grid,
-  Paper,
   Typography,
 } from "@mui/material";
 import { FilterListOutlined } from "@mui/icons-material";
