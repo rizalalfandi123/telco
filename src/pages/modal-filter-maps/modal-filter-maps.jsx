@@ -36,6 +36,8 @@ const generateInitialValues = (search) => {
 export const ModalFilterMaps = () => {
   const location = useLocation();
 
+  console.log({location})
+
   const initialValues = generateInitialValues(location.search);
 
   const { control, setValue, handleSubmit } = useForm({
@@ -64,7 +66,7 @@ export const ModalFilterMaps = () => {
     const cryptQuery = btoa(JSON.stringify(filterData));
 
     const newLocation = qs.stringifyUrl({
-      url: "/demand-analysis",
+      url: location.state["fallback"],
       query: { filter: cryptQuery },
     });
 
