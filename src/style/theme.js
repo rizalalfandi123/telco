@@ -1,7 +1,7 @@
 import { createTheme, alpha } from "@mui/material/styles";
 
 export const theme = () => {
-  const primaryColor = "#3b82f6";
+  const primaryColor = "#F13228";
   const borderRadius = 8;
   const fontColor = "#1e293b"
 

@@ -9,12 +9,15 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import Logo from "../../assets/logo.png";
 import { useCallback, useMemo, useState } from "react";
 
 import {
   AssessmentOutlined,
   LayersOutlined,
+  MapOutlined,
   Menu,
+  NotificationsNoneOutlined,
   SupportAgentOutlined,
   TrendingUpOutlined,
   TroubleshootOutlined,
@@ -36,7 +39,7 @@ const navigationBar = [
   {
     title: "Competitive Mapping",
     pathname: "/competitive-mapping",
-    icon: <LayersOutlined />,
+    icon: <MapOutlined />,
     children: [
       {
         title: "Competition Analysis",
@@ -118,22 +121,39 @@ export const Navbar = ({ children }) => {
             display: "flex",
             minHeight: "64px !important",
             justifyContent: "space-between",
+            borderBottom: "2px solid #F13228",
           }}
         >
-          <Box sx={{ display:"flex" }}>
-            <IconButton
-              edge="start"
-              onClick={handleButtonMenu}
-              sx={{ marginRight: 1 }}
+          <Box sx={{ display: "flex" }}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ marginTop: "5px" }}
             >
-              <Menu />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div" sx={{ marginTop:"5px" }}>
-              LOGO DISINI
+              <img src={Logo} alt="" width="90%" />
             </Typography>
+            <div>
+              <IconButton
+                edge="start"
+                onClick={handleButtonMenu}
+                sx={{
+                  marginLeft: 2,
+                  marginTop: 1.5,
+                  backgroundColor: "#FDF4F3",
+                  color: "#F13228",
+                }}
+              >
+                <Menu />
+              </IconButton>
+            </div>
           </Box>
-          <Box>
+
+          <Box sx={{ display: "flex" }}>
             <UserMenu />
+            <IconButton>
+              <NotificationsNoneOutlined />
+            </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
