@@ -15,6 +15,23 @@ const DemandAnalysis = lazy(() =>
   }))
 );
 
+const CompetitionAnalysis = lazy(()=> 
+  import ("../pages").then(({ CompetitionAnalysisPage })=> ({
+    default: CompetitionAnalysisPage,
+  }))
+);
+
+const SwitcherAnalysis = lazy(()=> 
+import("../pages").then(({ SwitcherAnalysisPage })=> ({
+  default: SwitcherAnalysisPage,
+})));
+
+const DecisionSupportSystem = lazy(()=> 
+  import ("../pages").then(({ DecisionSupportSystemPage })=> ({
+    default: DecisionSupportSystemPage,
+  }))
+);
+
 const SuspenseWrapper = ({ children }) => {
   return <Suspense fallback={<div>test loading</div>}>{children}</Suspense>;
 };
@@ -38,12 +55,24 @@ export const AppRouter = () => {
           />
           <Route
             path="/competition-analysis"
-            element={<CompetitionAnalysisPage />}
+            element={
+              <SuspenseWrapper>
+                <CompetitionAnalysis />
+              </SuspenseWrapper>
+            }
           />
-          <Route path="/switcher-analysis" element={<SwitcherAnalysisPage />} />
+          <Route path="/switcher-analysis" element={
+            <SuspenseWrapper>
+              <SwitcherAnalysis/>
+            </SuspenseWrapper>
+          } />
           <Route
             path="/decision-support-system"
-            element={<DecisionSupportSystemPage />}
+            element={
+              <SuspenseWrapper>
+                <DecisionSupportSystem/>
+              </SuspenseWrapper>
+            }
           />
         </Route>
       </Routes>
