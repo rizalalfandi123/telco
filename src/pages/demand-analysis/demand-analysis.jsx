@@ -14,6 +14,7 @@ import { FilterListOutlined } from "@mui/icons-material";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import qs from "query-string";
 import { parseExistFilter } from "../../utils/parse-exist-filter";
+import Audiences from "../../components/audiences/audiences";
 
 export const DemandAnalysisPage = () => {
   let location = useLocation();
@@ -61,21 +62,13 @@ export const DemandAnalysisPage = () => {
           </Card>
         </Grid>
 
-        <Grid item>
-          <Paper
-            sx={({ breakpoints, palette, shape }) => ({
-              height: "80vh",
-              backgroundColor: palette.background.paper,
-              borderRadius: shape.borderRadius + "px",
-              padding: 1,
-
-              [breakpoints.up("md")]: {
-                height: "65vh",
-              },
-            })}
-          >
-            <Maps />
-          </Paper>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={8}>
+              <Maps />
+          </Grid>
+          <Grid item xs={12} md={4}>
+              <Audiences/>
+          </Grid>
         </Grid>
       </Grid>
     </>

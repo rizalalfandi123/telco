@@ -1,4 +1,4 @@
-import { Box, CircularProgress } from "@mui/material";
+import { Box, CircularProgress,  Paper, } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Map, { Layer, Source } from "react-map-gl";
@@ -78,42 +78,55 @@ export const Maps = () => {
 
   return (
     <>
-      <Map
-        ref={(map) => {
-          setMap(map);
-        }}
-        initialViewState={{
-          latitude: -3.337954,
-          longitude: 116.596456,
-          zoom: 5,
-        }}
-        mapStyle="mapbox://styles/mapbox/light-v11"
-        mapboxAccessToken={MAPBOX_TOKEN}
-        style={{ height: "100%", borderRadius: "8px" }}
-        interactive
-        interactiveLayerIds={["data"]}
+      <Paper
+        sx={({ breakpoints, palette, shape }) => ({
+          height: "80vh",
+          backgroundColor: palette.background.paper,
+          borderRadius: shape.borderRadius + "px",
+          padding: 1,
+
+          [breakpoints.up("md")]: {
+            height: "65vh",
+          },
+        })}
       >
-        <Source type="geojson" data={geoJson} id="data">
-          <Layer {...dataLayer} interactive />
-        </Source>
-        {isLoading && (
-          <Box
-            sx={{
-              height: "100%",
-              backgroundColor: "transparent",
-              width: "100%",
-              position: "absolute",
-              top: 0,
-              right: 0,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <CircularProgress size="2.8rem" />
-          </Box>
-        )}
-      </Map>
+        <Map
+          ref={(map) => {
+            setMap(map);
+          }}
+          initialViewState={{
+            latitude: -3.337954,
+            longitude: 116.596456,
+            zoom: 5,
+          }}
+          mapStyle="mapbox://styles/mapbox/light-v11"
+          mapboxAccessToken={MAPBOX_TOKEN}
+          style={{ height: "100%", borderRadius: "8px" }}
+          interactive
+          interactiveLayerIds={["data"]}
+        >
+          <Source type="geojson" data={geoJson} id="data">
+            <Layer {...dataLayer} interactive />
+          </Source>
+          {isLoading && (
+            <Box
+              sx={{
+                height: "100%",
+                backgroundColor: "transparent",
+                width: "100%",
+                position: "absolute",
+                top: 0,
+                right: 0,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <CircularProgress size="2.8rem" />
+            </Box>
+          )}
+        </Map>
+      </Paper>
     </>
   );
 };

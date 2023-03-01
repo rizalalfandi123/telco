@@ -126,20 +126,12 @@ export const Navbar = ({ children }) => {
           }}
         >
           <Box sx={{ display: "flex" }}>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ marginTop: "5px" }}
-            >
-              <img src={Logo} alt="" width="90%" />
-            </Typography>
             <div>
               <IconButton
                 edge="start"
                 onClick={handleButtonMenu}
                 sx={{
-                  marginLeft: 2,
+                  marginRight: 4,
                   marginTop: 1.5,
                   backgroundColor: "#FDF4F3",
                   color: "#F13228",
@@ -148,9 +140,17 @@ export const Navbar = ({ children }) => {
                 <Menu />
               </IconButton>
             </div>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ marginTop: "10px" }}
+            >
+              <img src={Logo} alt="" width="90%" />
+            </Typography>
           </Box>
 
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: "flex", marginTop:"4px" }}>
             <UserMenu />
             <IconButton>
               <NotificationsNoneOutlined />
@@ -188,7 +188,6 @@ export const Navbar = ({ children }) => {
                 easing: transitions.easing.sharp,
                 duration: transitions.duration.enteringScreen,
               }),
-
               boxSizing: "border-box",
               width: drawerWidth,
               borderRight: 0,
