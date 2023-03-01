@@ -83,6 +83,33 @@ export const theme = () => {
         },
       },
 
+      MuiListItemButton: {
+        // defaultProps,
+        styleOverrides: {
+          root: {
+            margin: "0 4px",
+            "&.Mui-selected": {
+              borderRadius: borderRadius + "px",
+
+              backgroundColor: alpha(primaryColor, 0.1),
+
+              "& .MuiTypography-root": {
+                color: primaryColor,
+              },
+
+              "& .MuiSvgIcon-root": {
+                color: primaryColor,
+              },
+            },
+
+            ":hover": {
+              borderRadius: borderRadius + "px",
+
+            }
+          },
+        },
+      },
+
       MuiStepLabel: {
         styleOverrides: {
           root: {

@@ -1,10 +1,10 @@
-import { ResponsiveSankey } from "@nivo/sankey";
-import axios from "axios";
+import { Sankey as AntSankey } from "@ant-design/plots";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useQuery } from "react-query";
-import { endpoints } from "../../utils/endpoints";
 import qs from "query-string";
+import { endpoints } from "../../utils/endpoints";
+import axios from "axios";
 import { CardContent } from "@mui/material";
-import { useMemo } from "react";
 
 export const Sankey = () => {
   const swictherEndpoint = qs.stringifyUrl({
@@ -14,7 +14,7 @@ export const Sankey = () => {
     },
   });
 
-  const { data: sankeyData, isLoading } = useQuery({
+  const { data: sankeyData = { links: [] }, isLoading } = useQuery({
     queryFn: async () => {
       const res = await axios.get(swictherEndpoint);
 
@@ -30,50 +30,20 @@ export const Sankey = () => {
 
   console.log({ sankeyData });
 
-  if (!sankeyData || isLoading) {
-    return null;
-  }
-
-  const size = sankeyData.links.length * 2;
-
-  const diagram = useMemo(() => {
-    return (
-      <ResponsiveSankey
-        data={sankeyData}
-        align="justify"
-        colors={(data) => data.nodeColor}
-        nodeOpacity={1}
-        nodeHoverOthersOpacity={0.35}
-        nodeThickness={13}
-        nodeSpacing={24}
-        nodeBorderWidth={0}
-        nodeBorderColor={{
-          from: "color",
-          modifiers: [["darker", 0.8]],
-        }}
-        nodeBorderRadius={3}
-        linkOpacity={0.4}
-        linkHoverOthersOpacity={0.1}
-        linkContract={3}
-        enableLinkGradient
-        labelPosition="inside"
-        labelOrientation="horizontal"
-        labelPadding={20}
-        labelTextColor={{
-          from: "color",
-          modifiers: [["darker", 1]],
-        }}
-      />
-    );
-  }, [size]);
-
   return (
-    <CardContent
-      sx={() => ({
-        height: `${size}rem`,
-      })}
-    >
-      {diagram}
+    <CardContent sx={{height: `${sankeyData.links.length}rem`}}>
+      <AntSankey
+        data={sankeyData.links}
+        sourceField="source"
+        targetField="target"
+        weightField="value"
+        nodeStyle={{ fontFamily: "Poppins" }}
+        nodeDraggable
+        animation
+        autoFit
+        loading={isLoading}
+        loadingTemplate={<CircularProgress />}
+      />
     </CardContent>
   );
 };

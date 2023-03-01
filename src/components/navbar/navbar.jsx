@@ -1,24 +1,28 @@
 import {
-  useState,
-  useMemo,
-  useCallback,
-} from "react";
-import {
-  Toolbar,
-  List,
-  Box,
   AppBar,
-  IconButton,
-  Typography,
+  Box,
   Drawer,
+  IconButton,
+  List,
+  Toolbar,
+  Typography,
   useMediaQuery,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { useCallback, useMemo, useState } from "react";
 
-import { Inbox, Menu } from "@mui/icons-material";
-import { useApplicationSettings } from "../../services";
+import {
+  AssessmentOutlined,
+  LayersOutlined,
+  Menu,
+  SupportAgentOutlined,
+  TrendingUpOutlined,
+  TroubleshootOutlined,
+} from "@mui/icons-material";
 import { Outlet } from "react-router-dom";
-import {DrawerItem} from "./drawer-item"
+import { useApplicationSettings } from "../../services";
+import { DrawerItem } from "./drawer-item";
+import UserMenu from "../menu/user-menu";
 
 const normalWidthSidebar = 275;
 const miniWidthSidebar = 70;
@@ -27,29 +31,29 @@ const navigationBar = [
   {
     title: "Demand Analysis",
     pathname: "/demand-analysis",
-    icon: <Inbox />,
+    icon: <TrendingUpOutlined />,
   },
   {
     title: "Competitive Mapping",
     pathname: "/competitive-mapping",
-    icon: <Inbox />,
+    icon: <LayersOutlined />,
     children: [
       {
         title: "Competition Analysis",
         pathname: "/competition-analysis",
-        icon: <Inbox />,
+        icon: <AssessmentOutlined />,
       },
       {
         title: "Switcher Analysis",
         pathname: "/switcher-analysis",
-        icon: <Inbox />,
+        icon: <TroubleshootOutlined />,
       },
     ],
   },
   {
     title: "Decision Support System",
     pathname: "/decision-support-system",
-    icon: <Inbox />,
+    icon: <SupportAgentOutlined />,
   },
 ];
 
@@ -109,17 +113,28 @@ export const Navbar = ({ children }) => {
           backgroundColor: palette.background.default,
         })}
       >
-        <Toolbar sx={{ minHeight: "64px !important" }}>
-          <IconButton
-            edge="start"
-            onClick={handleButtonMenu}
-            sx={{ marginRight: 1 }}
-          >
-            <Menu />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            LOGO DISINI
-          </Typography>
+        <Toolbar
+          sx={{
+            display: "flex",
+            minHeight: "64px !important",
+            justifyContent: "space-between",
+          }}
+        >
+          <Box sx={{ display:"flex" }}>
+            <IconButton
+              edge="start"
+              onClick={handleButtonMenu}
+              sx={{ marginRight: 1 }}
+            >
+              <Menu />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div" sx={{ marginTop:"5px" }}>
+              LOGO DISINI
+            </Typography>
+          </Box>
+          <Box>
+            <UserMenu />
+          </Box>
         </Toolbar>
       </AppBar>
       <Box
@@ -185,8 +200,8 @@ export const Navbar = ({ children }) => {
           },
         })}
       >
-        <Outlet/>
+        <Outlet />
       </Box>
     </Box>
   );
-}
+};

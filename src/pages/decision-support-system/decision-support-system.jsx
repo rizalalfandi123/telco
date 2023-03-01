@@ -11,30 +11,8 @@ import {
   Typography,
 } from "@mui/material";
 import { FilterListOutlined } from "@mui/icons-material";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import qs from "query-string";
-import { parseExistFilter } from "../../utils/parse-exist-filter";
-import { Sankey } from "../../components/sankey/sankey";
 
-export const SwitcherAnalysisPage = () => {
-  let location = useLocation();
-
-  const navigate = useNavigate();
-
-  const params = useParams();
-
-  const handleClickModalFilter = () => {
-    let modalLocation = "/modal";
-
-    if (location.search) {
-      modalLocation = modalLocation + location.search;
-    }
-
-    navigate(modalLocation, {
-      state: { backgroundLocation: location },
-    });
-  };
-
+export const DecisionSupportSystemPage = () => {
   return (
     <>
       <Grid container direction="column" gap={2}>
@@ -50,11 +28,7 @@ export const SwitcherAnalysisPage = () => {
             >
               <Typography variant="h5">Kalimantan</Typography>
 
-              <Button
-                variant="outlined"
-                sx={{ paddingLeft: "10px" }}
-                onClick={handleClickModalFilter}
-              >
+              <Button variant="outlined" sx={{ paddingLeft: "10px" }}>
                 <FilterListOutlined sx={{ marginRight: "0.8rem" }} />
                 Filter
               </Button>
@@ -77,17 +51,6 @@ export const SwitcherAnalysisPage = () => {
           >
             <Maps />
           </Paper>
-        </Grid>
-
-        <Grid item>
-          <Card>
-            <CardHeader title="Sankey" />
-            <Divider />
-
-            <CardContent sx={{position: "relative"}}>
-              <Sankey />
-            </CardContent>
-          </Card>
         </Grid>
       </Grid>
     </>
