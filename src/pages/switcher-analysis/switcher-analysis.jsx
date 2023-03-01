@@ -15,13 +15,12 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import qs from "query-string";
 import { parseExistFilter } from "../../utils/parse-exist-filter";
 import { Sankey } from "../../components/sankey/sankey";
+import { endpoints } from "../../utils/endpoints";
 
 export const SwitcherAnalysisPage = () => {
   let location = useLocation();
 
   const navigate = useNavigate();
-
-  const params = useParams();
 
   const handleClickModalFilter = () => {
     let modalLocation = "/modal";
@@ -31,7 +30,7 @@ export const SwitcherAnalysisPage = () => {
     }
 
     navigate(modalLocation, {
-      state: { backgroundLocation: location },
+      state: { backgroundLocation: location, fallback: location.pathname },
     });
   };
 
@@ -80,14 +79,7 @@ export const SwitcherAnalysisPage = () => {
         </Grid>
 
         <Grid item>
-          <Card>
-            <CardHeader title="Sankey" />
-            <Divider />
-
-            <CardContent sx={{position: "relative"}}>
-              <Sankey />
-            </CardContent>
-          </Card>
+          <Sankey />
         </Grid>
       </Grid>
     </>

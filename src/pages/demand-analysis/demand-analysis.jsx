@@ -30,7 +30,7 @@ export const DemandAnalysisPage = () => {
     }
 
     navigate(modalLocation, {
-      state: { backgroundLocation: location },
+      state: { backgroundLocation: location, fallback: location.pathname },
     });
   };
 
