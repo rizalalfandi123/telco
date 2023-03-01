@@ -83,16 +83,8 @@ export const DemandAnalysisPage = () => {
           <Card>
             <CardHeader title="Sankey" />
             <Divider />
-            <CardContent
-              sx={({ breakpoints }) => ({
-                height: "60vh",
-                [breakpoints.down("md")]: {
-                  height: "80vh",
-                },
-              })}
-            >
-              <Sankey />
-            </CardContent>
+
+            <Sankey />
           </Card>
         </Grid>
       </Grid>

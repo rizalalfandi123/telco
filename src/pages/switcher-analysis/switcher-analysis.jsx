@@ -15,6 +15,7 @@ import { Sankey } from "../../components/sankey/sankey";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import qs from "query-string";
 import { parseExistFilter } from "../../utils/parse-exist-filter";
+import { DemoSankey } from "./test";
 
 export const SwitcherAnalysisPage = () => {
   let location = useLocation();
@@ -84,7 +85,9 @@ export const SwitcherAnalysisPage = () => {
             <CardHeader title="Sankey" />
             <Divider />
 
-            <Sankey />
+            <CardContent sx={{position: "relative"}}>
+              <DemoSankey />
+            </CardContent>
           </Card>
         </Grid>
       </Grid>
